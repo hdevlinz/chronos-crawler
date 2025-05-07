@@ -1,0 +1,13 @@
+services:
+   affiliate-crawler:
+      container_name: affiliate-crawler
+      build:
+         context: ../
+         dockerfile: ./docker/Dockerfile
+      restart: on-failure
+      command: poetry run python manage.py browser-use -p tiktok -t affiliate
+      env_file:
+         - ../.env
+      volumes:
+         - '../chronos:/app/chronos:ro'
+         - '../scripts:/app/scripts:ro'

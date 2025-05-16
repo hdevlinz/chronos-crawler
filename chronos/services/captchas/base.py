@@ -1,10 +1,7 @@
 import asyncio
-import json
 import re
-import tempfile
 from abc import ABC, abstractmethod
-from datetime import datetime
-from typing import Any, Callable, Dict, List, Optional, TypeVar
+from typing import Callable, List, Optional, TypeVar
 
 from loguru import logger
 from playwright.async_api import FloatRect, Page
@@ -13,7 +10,6 @@ from chronos.core.settings import Settings
 from chronos.infrastructure.clients.captcha import CaptchaClient
 from chronos.infrastructure.storage.local import LocalStorageManager
 from chronos.schemas.enums.captchas import CaptchaType
-from chronos.utils.helpers import cleanup_temp_file
 
 T = TypeVar("T")
 
@@ -148,39 +144,6 @@ class BaseCaptchaSolver(ABC):
                 logger.warning(f"⚠️ Returning default value for `{attr}` in selector `{selector}`: `{default}`")
                 return default
             raise
-
-    async def _save_captcha_logs(
-        self,
-        type: str,
-        status: str,
-        platform: str,
-        extra: Dict[str, Any],
-    ) -> None:
-        log_data = {
-            "timestamp": datetime.now().isoformat(),
-            "type": type.lower(),
-            "status": status.lower(),
-            **extra,
-        }
-
-        current_time = datetime.now()
-        timestamp_str = current_time.strftime("%y%m%d_%H%M%S")
-        file_key = f"{platform.lower()}/captchas/{type.lower()}/{status.lower()}/{timestamp_str}.json"
-
-        temp_file_path = ""
-        try:
-            with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".json", encoding="utf-8") as temp:
-                json.dump(obj=log_data, fp=temp, ensure_ascii=False, indent=4)
-                temp_file_path = temp.name
-
-            self._local_storage.upload_file(file_path=temp_file_path, file_key=file_key)
-            logger.info(f"📂 Successfully saved captcha log: `{type} - {status}`")
-
-        except Exception as e:
-            logger.error(f"❌ Failed to save captcha log: {e}")
-
-        finally:
-            await cleanup_temp_file(file_path=temp_file_path)
 
     @abstractmethod
     async def captcha_is_present(self, timeout: int = 15) -> bool:

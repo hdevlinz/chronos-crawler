@@ -1,4 +1,4 @@
-class Selectors:
+class TiktokSelectors:
     class Wrappers:
         V1 = ".captcha-disable-scroll"
         V2 = ".captcha-verify-container"
@@ -16,28 +16,33 @@ class Selectors:
         PIECE_IMAGE_CONTAINER = ".captcha-verify-container div[draggable=true]:has(img[draggable=false])"
         PIECE = ".captcha-verify-container .cap-absolute img"
         SLIDER_DRAG_BUTTON = ".secsdk-captcha-drag-icon"
+        REFRESH_BUTTON = ""
 
     class ShapesV1:
         UNIQUE_IDENTIFIER = ".captcha-disable-scroll .verify-captcha-submit-button"
         IMAGE = "#captcha-verify-image"
         SUBMIT_BUTTON = ".verify-captcha-submit-button"
+        REFRESH_BUTTON = ""
 
     class ShapesV2:
         UNIQUE_IDENTIFIER = ".captcha-verify-container .cap-relative button.cap-w-full"
         IMAGE = ".captcha-verify-container div.cap-relative img"
         SUBMIT_BUTTON = ".captcha-verify-container .cap-relative button.cap-w-full"
+        REFRESH_BUTTON = ""
 
     class IconV1:
         UNIQUE_IDENTIFIER = ".captcha-disable-scroll .verify-captcha-submit-button"
         IMAGE = "#captcha-verify-image"
         TEXT = ".captcha_verify_bar"
         SUBMIT_BUTTON = ".verify-captcha-submit-button"
+        REFRESH_BUTTON = ""
 
     class IconV2:
         UNIQUE_IDENTIFIER = ".captcha-verify-container .cap-relative button.cap-w-full"
         IMAGE = ".captcha-verify-container div.cap-relative img"
         TEXT = ".captcha-verify-container > div > div > span"
         SUBMIT_BUTTON = ".captcha-verify-container .cap-relative button.cap-w-full"
+        REFRESH_BUTTON = ""
 
     class RotateV1:
         UNIQUE_IDENTIFIER = ".captcha-disable-scroll [data-testid=whirl-inner-img]"
@@ -45,6 +50,7 @@ class Selectors:
         OUTER = "[data-testid=whirl-outer-img]"
         SLIDE_BAR = ".captcha_verify_slide--slidebar"
         SLIDER_DRAG_BUTTON = ".secsdk-captcha-drag-icon"
+        REFRESH_BUTTON = ""
 
     class RotateV2:
         UNIQUE_IDENTIFIER = ".captcha-verify-container > div > div > div > img.cap-absolute"

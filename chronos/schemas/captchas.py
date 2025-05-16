@@ -15,8 +15,11 @@ class PuzzleCaptchaResponse(BaseModel):
     box: List[float]
 
 
-class RotateCaptchaResponse(BaseModel):
-    angle: int
+class ShapesCaptchaResponse(BaseModel):
+    point_one_proportion_x: float
+    point_one_proportion_y: float
+    point_two_proportion_x: float
+    point_two_proportion_y: float
 
 
 class ProportionalPoint(BaseModel):
@@ -28,8 +31,5 @@ class IconCaptchaResponse(BaseModel):
     proportional_points: list[ProportionalPoint]
 
 
-class ShapesCaptchaResponse(BaseModel):
-    point_one_proportion_x: float
-    point_one_proportion_y: float
-    point_two_proportion_x: float
-    point_two_proportion_y: float
+class RotateCaptchaResponse(BaseModel):
+    angle: int
